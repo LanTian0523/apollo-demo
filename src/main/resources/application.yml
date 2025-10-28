@@ -1,0 +1,12 @@
+server:
+  port: 8088
+
+app:
+  id: demo-springboot # 应用id,与Apollo中创建的保持一致
+
+apollo:
+  meta: http://47.97.104.107:8080 # Apollo Meta服务地址
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
