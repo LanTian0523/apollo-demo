@@ -10,8 +10,9 @@ apollo:
     enabled: true
     eagerLoad:
       enabled: true
-
-rocketmq:
-  name-server: localhost:9876
-  producer:
-    group: GID-AOI-WORKBENCH
+  admin-url: http://47.97.104.107:8090
+  app-id: demo-springboot
+  env: DEV
+  cluster: default
+  namespace: application
+  token: 660b6876835cdaaf28cb346261d8479ede4696d1
