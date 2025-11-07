@@ -10,6 +10,11 @@ apollo:
     enabled: true
     eagerLoad:
       enabled: true
+  admin-url: http://47.97.104.107:8090
+  app-id: demo-springboot
+  cluster: default
+  namespace: application
+  token: 1e0d0b0b0a0b0c0d0e0f0g0h0i0j
 
 rocketmq:
   name-server: localhost:9876
