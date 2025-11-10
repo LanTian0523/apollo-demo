@@ -10,9 +10,9 @@ apollo:
     enabled: true
     eagerLoad:
       enabled: true
-  admin-url: http://47.97.104.107:8090
+  admin-url: http://47.97.104.107:8070
   app-id: demo-springboot
   env: DEV
   cluster: default
   namespace: application
-  token: 660b6876835cdaaf28cb346261d8479ede4696d1
+  token: 02d6194c091dccd5d74733ec0f83339e114a2b6f

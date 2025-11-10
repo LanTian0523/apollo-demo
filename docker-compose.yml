@@ -1,0 +1,53 @@
+version: '2.1'
+
+services:
+  apollo-quick-start:
+    image: nobodyiam/apollo-quick-start
+    container_name: apollo-quick-start
+    depends_on:
+      apollo-db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+      - "8070:8070"
+      - "8090:8090"
+    links:
+      - apollo-db
+    environment:
+      JAVA_OPTS: >
+        -Dapollo.config-service.url=http://47.97.104.107:8080
+        -Dapollo.admin-service.url=http://47.97.104.107:8090
+        -Deureka.instance.hostname=47.97.104.107
+        -Dapollo.openapi.enabled=true
+        -Xms512m -Xmx1024m -Xmn256m
+        -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=384m
+      APOLLO_CONFIG_DB_USERNAME: 'root'
+      APOLLO_CONFIG_DB_PASSWORD: 'apollo'
+      APOLLO_PORTAL_DB_USERNAME: 'root'
+      APOLLO_PORTAL_DB_PASSWORD: 'apollo'
+
+  apollo-db:
+    image: mysql:8.0
+    container_name: apollo-db
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+    depends_on:
+      - apollo-dbdata
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    volumes_from:
+      - apollo-dbdata
+
+  apollo-dbdata:
+    image: alpine:latest
+    container_name: apollo-dbdata
+    volumes:
+      - /var/lib/mysql
